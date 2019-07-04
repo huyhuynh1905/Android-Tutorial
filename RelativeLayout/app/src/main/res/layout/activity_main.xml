@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:padding="10dp"
+        android:text="HCode1"
+        android:id="@+id/txt1"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_below="@id/txt1"
+        android:layout_toRightOf="@id/txt1"
+        android:padding="10dp"
+        android:text="HCode2"
+        android:id="@+id/txt2"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_below="@id/txt2"
+        android:layout_alignParentRight="true"
+        android:padding="10dp"
+        android:text="HCode3"
+        android:id="@+id/txt3"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="400dp"
+        android:layout_below="@id/txt3"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:text="HCode4"
+        android:id="@+id/txt4"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_centerInParent="true"
+        android:padding="10dp"
+        android:text="HCode5"
+        android:id="@+id/txt5"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
