@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout android:layout_height="match_parent"
+    android:stretchColumns="*"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent">
+
+    <TableRow>
+        <TextView
+            android:gravity="center"
+            android:layout_span="5"
+            android:background="#ff0"
+            android:text="HCode"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="25sp"
+            />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="HCode"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="25sp"
+            />
+        <TextView
+            android:text="HCode"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="25sp"
+            />
+
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="HCode"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="25sp"
+            />
+        <TextView
+            android:text="HCode"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="25sp"
+            />
+        <TextView
+            android:text="HCode"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="25sp"
+            />
+        <TextView
+            android:text="HCode"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="25sp"
+            />
+    </TableRow>
+
+</TableLayout>
