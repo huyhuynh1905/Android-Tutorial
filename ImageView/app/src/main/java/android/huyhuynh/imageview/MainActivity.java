@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        imgView = findViewById(R.id.imageView);
         btnChange = findViewById(R.id.btnBackground);
         layoutBackgr = findViewById(R.id.layoutBack);
         ls = new ArrayList<>();
@@ -42,13 +41,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void control() {
-        imgView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Collections.shuffle(ls);
-                layoutBackgr.setBackgroundResource(ls.get(0));
-            }
-        });
         btnChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
