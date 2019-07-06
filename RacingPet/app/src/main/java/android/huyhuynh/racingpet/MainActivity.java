@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int point = Integer.parseInt(txtPoint.getText().toString().trim());
                 if (point==0){
-                    Toast.makeText(MainActivity.this,"You Close! Bye Bye!",
+                    Toast.makeText(MainActivity.this,"You Lose! Bye Bye!",
                             Toast.LENGTH_SHORT).show();
                 } else if (!chkPika.isChecked()&&!chkMew.isChecked()&&!chkPsyDuck.isChecked()){
                     Toast.makeText(MainActivity.this,"Please Select Your Pet!",
@@ -102,6 +102,10 @@ public class MainActivity extends AppCompatActivity {
         seekMew.setProgress(0);
         seekPsyDuck.setProgress(0);
 
+        seekPika.setEnabled(false);
+        seekMew.setEnabled(false);
+        seekPsyDuck.setEnabled(false);
+
         chkPika.setEnabled(false);
         chkMew.setEnabled(false);
         chkPsyDuck.setEnabled(false);
@@ -118,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             int point = Integer.parseInt(txtPoint.getText().toString().trim());
             txtPoint.setText(String.valueOf(point+10));
         } else {
-            Toast.makeText(MainActivity.this,"You close -10",Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this,"You lose -10",Toast.LENGTH_SHORT).show();
             int point = Integer.parseInt(txtPoint.getText().toString().trim());
             txtPoint.setText(String.valueOf(point-10));
         }
