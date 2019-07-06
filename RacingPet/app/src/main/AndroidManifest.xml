@@ -6,7 +6,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/instinct"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/instinct"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity"
