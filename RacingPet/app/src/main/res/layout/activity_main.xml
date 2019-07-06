@@ -7,42 +7,120 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="734dp"
-        android:layout_height="154dp"
-        android:background="#38A79C"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        ></LinearLayout>
-
-    <LinearLayout
-        android:layout_width="731dp"
-        android:layout_height="257dp"
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:layout_weight="1"
+            android:weightSum="3"
+            android:background="#00BCD4"
             android:layout_width="match_parent"
-            android:layout_height="86dp"
-            android:orientation="horizontal"
-            android:background="#4CAF50"></LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtPoint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:layout_weight="1"
+                android:textColor="#FFF"
+                android:text="100"
+                android:textSize="50sp"/>
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/logogame"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:id="@+id/imgPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/play" />
+        </LinearLayout>
 
         <LinearLayout
+            android:layout_weight="1"
+            android:weightSum="3"
+            android:background="#FF5722"
             android:layout_width="match_parent"
-            android:layout_height="86dp"
-            android:orientation="horizontal"
-            android:background="#FF5722"></LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:background="#FFEB3B"></LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/chkPikachu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"/>
+
+                <SeekBar
+                    android:id="@+id/seekPikachu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:max="100"
+                    android:thumb="@drawable/pikachu" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:background="#FFEB3B"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/chkMew"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+                <SeekBar
+                    android:id="@+id/seekMew"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:max="100"
+                    android:thumb="@drawable/meowth" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:background="#8BC34A"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/chkpsyduck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+                <SeekBar
+                    android:id="@+id/seekpsyduck"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:max="100"
+                    android:thumb="@drawable/psyduck" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
