@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CustomLanguageApp</string>
+    <string name="txt_Form">Nhập thông tin</string>
+    <string name="hint_Name">Nhập tên</string>
+    <string name="hint_Email">Nhập email</string>
+    <string name="hint_Phone">Nhập số điện thoại</string>
+    <string name="button_Confirm">Xác nhận</string>
+    <string name="txt_Name">Tên: </string>
+    <string name="txt_Phone">Số điện thoại: </string>
+</resources>

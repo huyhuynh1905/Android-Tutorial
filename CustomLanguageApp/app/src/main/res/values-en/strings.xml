@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CustomLanguageApp</string>
+    <string name="button_Confirm">Confirm</string>
+    <string name="hint_Email">Input Email</string>
+    <string name="hint_Name">Input Name</string>
+    <string name="hint_Phone">Input Phone</string>
+    <string name="txt_Form">Input Form</string>
+    <string name="txt_Name">"Name: "</string>
+    <string name="txt_Phone">"Phone: "</string>
+</resources>
