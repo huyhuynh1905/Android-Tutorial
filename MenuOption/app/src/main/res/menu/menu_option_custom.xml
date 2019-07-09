@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:title="Add"
+        android:id="@+id/menuAdd"
+        app:showAsAction="always"/>
+
+    <item android:title="Search"
+        android:id="@+id/menuSearch"/>
+    <item android:title="Info"
+        android:id="@+id/menuInfo">
+        <menu>
+            <item android:title="About"
+                android:id="@+id/menuAbout"/>
+            <item android:title="Excute"
+                android:id="@+id/menuEx"/>
+        </menu>
+    </item>
+    <item android:title="Exit"
+        android:id="@+id/menuExit"/>
+
+
+</menu>
