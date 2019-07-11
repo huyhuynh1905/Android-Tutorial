@@ -26,15 +26,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent mainIntent = new Intent(MainActivity.this,SecondActivity.class);
 
-//                String text = edtText.getText().toString().trim();
-//                int num = Integer.parseInt(edtNum.getText().toString().trim());
-//
-//                mainIntent.putExtra("Str",text);
-//                mainIntent.putExtra("Num",num);
-//                String[] arrStr = {"Hcode","Java","Android"};
-//                mainIntent.putExtra("Array",arrStr);
+                String text = "Hello This Bundle";
+                int num = 1231;
+
+                //mainIntent.putExtra("Str",text);
+                //mainIntent.putExtra("Num",num);
+                String[] arrStr = {"Hcode","Java","Android"};
+                //mainIntent.putExtra("Array",arrStr);
                 Student student = new Student("Hcode",19);
-                mainIntent.putExtra("ObjectSend",student);
+                //mainIntent.putExtra("ObjectSend",student);
+                Bundle bundle = new Bundle();
+                bundle.putString("Str",text);
+                bundle.putInt("num",num);
+                bundle.putStringArray("arr",arrStr);
+                bundle.putSerializable("obj",student);
+
+                mainIntent.putExtra("data",bundle); //
 
                 startActivity(mainIntent);
             }

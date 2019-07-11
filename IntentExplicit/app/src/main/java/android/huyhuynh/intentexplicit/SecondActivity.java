@@ -28,9 +28,19 @@ public class SecondActivity extends AppCompatActivity {
 //        txtShow.setText("Text: "+strRece+"\n"+"Number: "+numRece);
 //        String[] arrRece = receInten.getStringArrayExtra("Array");
 //        txtShow.setText(arrRece.length+" - "+arrRece[0]);
-        Student student = (Student) receInten.getSerializableExtra("ObjectSend");
-        txtShow.setText(student.getName()+"-"+student.getAge());
-
+//        Student student = (Student) receInten.getSerializableExtra("ObjectSend");
+//        txtShow.setText(student.getName()+"-"+student.getAge());
+        String data ="";
+        Bundle bundle = receInten.getBundleExtra("data");
+        String text = bundle.getString("Str");
+        data=data+text+"\n";
+        int num = bundle.getInt("num");
+        data=data+num+"\n";
+        String[] arr = bundle.getStringArray("arr");
+        data=data+arr.length+"-"+arr[1]+"\n";
+        Student student = (Student) bundle.getSerializable("obj");
+        data=data+student.getName()+"\n";
+        txtShow.setText(data);
 
         btnSecondAc.setOnClickListener(new View.OnClickListener() {
             @Override
