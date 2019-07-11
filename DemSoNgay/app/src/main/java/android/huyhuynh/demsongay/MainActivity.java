@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     private void countDay() {
         Date dateOne = date1.getTime();
         Date dateTwo = date2.getTime();
-        
+
         long count = dateTwo.getTime()-dateOne.getTime();
         long day = count/(60*60*1000*24);
         if (day>=0){
