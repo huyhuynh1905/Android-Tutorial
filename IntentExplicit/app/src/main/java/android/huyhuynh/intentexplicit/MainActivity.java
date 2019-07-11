@@ -31,8 +31,10 @@ public class MainActivity extends AppCompatActivity {
 //
 //                mainIntent.putExtra("Str",text);
 //                mainIntent.putExtra("Num",num);
-                String[] arrStr = {"Hcode","Java","Android"};
-                mainIntent.putExtra("Array",arrStr);
+//                String[] arrStr = {"Hcode","Java","Android"};
+//                mainIntent.putExtra("Array",arrStr);
+                Student student = new Student("Hcode",19);
+                mainIntent.putExtra("ObjectSend",student);
 
                 startActivity(mainIntent);
             }
