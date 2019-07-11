@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         init();
+
+        Calendar cl = Calendar.getInstance();
+        cl.set(0,1,1);
+        SimpleDateFormat dateF = new SimpleDateFormat("dd/MM/yyyy");
+        Log.d("Test",dateF.format(cl.getTime()));
 
         edtDate1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,14 +68,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void countDay() {
-        int countDate =(int) (date2.getTimeInMillis() - date1.getTimeInMillis())/(1000*60*60*24);
-        Log.d("Date",(int)date2.getTimeInMillis()+"-Dat22");
-        Log.d("Date",(int)date1.getTimeInMillis()+"-Date1");
-        Log.d("Date",(int)(date2.getTimeInMillis() - date1.getTimeInMillis())+"=Date2-Date1");
-        if (countDate>=0){
-            txtShow.setText("Count: "+countDate);
+        Date dateOne = date1.getTime();
+        Date dateTwo = date2.getTime();
+        long count = dateTwo.getTime()-dateOne.getTime();
+        long day = count/(60*60*1000*24);
+        if (day>=0){
+            txtShow.setText("Count: "+String.valueOf(day));
         } else {
-            txtShow.setText("Error: "+countDate);
+            txtShow.setText("Error: "+String.valueOf(day));
             Toast.makeText(MainActivity.this,"Chọn ngày 2 ở sau ngày 1",
                     Toast.LENGTH_SHORT).show();
         }
@@ -86,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 SimpleDateFormat dateF = new SimpleDateFormat("dd/MM/yyyy");
                 edtDate1.setText(dateF.format(date1.getTime()));
             }
-        },y,m,d);
+        },2019,1,1);
         datePickerDialog.show();
     }
 
