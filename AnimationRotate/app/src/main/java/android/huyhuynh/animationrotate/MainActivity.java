@@ -10,17 +10,17 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView imgRotate;
+    ImageView imgScale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        imgRotate = findViewById(R.id.imgRotate);
+        imgScale = findViewById(R.id.imgScale);
 
-        final Animation animation = AnimationUtils.loadAnimation(this,R.anim.anim_custom_rotate);
+        final Animation animation = AnimationUtils.loadAnimation(this,R.anim.anim_custom_scale );
 
-        imgRotate.setOnClickListener(new View.OnClickListener() {
+        imgScale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 view.startAnimation(animation);
