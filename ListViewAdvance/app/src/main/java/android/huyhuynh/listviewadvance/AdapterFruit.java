@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -50,6 +52,10 @@ public class AdapterFruit extends BaseAdapter {
         txtName.setText(fruit.getName());
         txtInfo.setText(fruit.getInfo());
         imgPic.setImageResource(fruit.getPicture());
+
+        //set animation
+        Animation animation = AnimationUtils.loadAnimation(context,R.anim.anim_listview_custom);
+        view.startAnimation(animation);
 
         return view;
     }
