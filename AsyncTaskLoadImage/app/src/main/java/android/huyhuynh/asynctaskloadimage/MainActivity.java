@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String url = edtUrl.getText().toString().trim();
-                new LoadImageFromInternet().execute(url);
+                new LoadImageFromInternet().execute("https://i-sohoa.vnecdn.net/2019/07/13/anva220190713190653-1563020322-2551-1563020659_180x108.gif");
             }
         });
 
