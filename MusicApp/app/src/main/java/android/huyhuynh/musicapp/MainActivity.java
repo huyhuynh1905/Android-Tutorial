@@ -27,6 +27,31 @@ public class MainActivity extends AppCompatActivity {
         init();
         creatMediaInit();
 
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (posison==0){
+                    posison=arrSong.size()-1;
+                } else posison=posison-1;
+                if (mMediaPlayer.isPlaying()) mMediaPlayer.stop();
+                creatMediaInit();
+                mMediaPlayer.start();
+                btnPlay.setImageResource(R.drawable.pause);
+            }
+        });
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (posison==arrSong.size()-1){
+                    posison=0;
+                } else posison=posison+1;
+                if (mMediaPlayer.isPlaying()) mMediaPlayer.stop();
+                creatMediaInit();
+                mMediaPlayer.start();
+                btnPlay.setImageResource(R.drawable.pause);
+            }
+        });
+
         btnStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
