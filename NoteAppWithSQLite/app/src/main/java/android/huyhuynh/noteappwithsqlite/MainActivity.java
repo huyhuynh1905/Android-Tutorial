@@ -4,10 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     WorkDatabase mWorkDatabase;
+    Button btnAdd;
+    EditText edtNotes;
+    ListView lvNotes;
+    List<Notes> arrNotes;
+    AdapterNotes adapterNotes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +31,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
+        btnAdd = findViewById(R.id.btnAdd);
+        lvNotes = findViewById(R.id.lvNotes);
+        edtNotes = findViewById(R.id.edtNotes);
+        //
+        arrNotes = new ArrayList<>();
+        readDataBaseNotes();
+        adapterNotes = new AdapterNotes(this,R.layout.item_list_notes,arrNotes);
+        lvNotes.setAdapter(adapterNotes);
+
+
+    }
+
+    private void readDataBaseNotes() {
+        mWorkDatabase = new WorkDatabase(this,"noteapp.sqlite",null,1);
+        arrNotes.removeAll(arrNotes);
+        Cursor cursor = mWorkDatabase.getData("Select * from Notes");
+        while (cursor.moveToNext()){
+            int key = cursor.getInt(0);
+            String name = cursor.getString(1);
+            arrNotes.add(new Notes(key,name));
+        }
     }
 
     private void creatDataBase() {
