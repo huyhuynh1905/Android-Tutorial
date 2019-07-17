@@ -13,11 +13,11 @@ import java.util.List;
 
 public class AdapterNotes extends BaseAdapter {
 
-    private Context context;
+    private MainActivity context;
     private int layout;
     private List<Notes> arrNotes;
 
-    public AdapterNotes(Context context, int layout, List<Notes> arrNotes) {
+    public AdapterNotes(MainActivity context, int layout, List<Notes> arrNotes) {
         this.context = context;
         this.layout = layout;
         this.arrNotes = arrNotes;
@@ -44,12 +44,25 @@ public class AdapterNotes extends BaseAdapter {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = layoutInflater.inflate(layout,null);
 
-        ImageButton btnDel = view.findViewById(R.id.imgDel);
-        ImageButton btnEdit = view.findViewById(R.id.imgEdit);
+        ImageButton imgDel = view.findViewById(R.id.imgDel);
+        ImageButton imgEdit = view.findViewById(R.id.imgEdit);
         TextView txtNotes = view.findViewById(R.id.txtNotes);
 
-        Notes notes = arrNotes.get(i);
+        final Notes notes = arrNotes.get(i);
         txtNotes.setText(notes.getName());
+
+        imgEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.editNotesToDatabase(notes.getName(),notes.getKey());
+            }
+        });
+        imgDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.delNotesDatabase(notes.getKey());
+            }
+        });
 
         return view;
     }
