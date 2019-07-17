@@ -2,6 +2,7 @@ package android.huyhuynh.musicapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView imgCd;
     Animation mAnimation;
     int posison = 0;
+    int curretn = 0;
+    SharedPreferences sharedPre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,33 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SharedPreferences.Editor editor = sharedPre.edit();
+        editor.putInt("current",mMediaPlayer.getCurrentPosition());
+        editor.putInt("posion",posison);
+        editor.commit();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SharedPreferences.Editor editor = sharedPre.edit();
+        editor.putInt("current", mMediaPlayer.getCurrentPosition());
+        editor.putInt("posion", posison);
+        editor.commit();
+    }
+
+    private void saveSong() {
+        sharedPre = getSharedPreferences("saveSong",MODE_PRIVATE);
+
+        //load
+        posison = (int) sharedPre.getInt("posion",0);
+        curretn = (int) sharedPre.getInt("current",0);
+
+    }
+
     private void nextTheSong() {
         if (posison==arrSong.size()-1){
             posison=0;
@@ -107,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
                         nextTheSong();
                     }
                 });
+
                 handler.postDelayed(this,500);
             }
         },100);
@@ -132,7 +163,9 @@ public class MainActivity extends AppCompatActivity {
     private void setDurationSong(){
         SimpleDateFormat format = new SimpleDateFormat("mm:ss");
         txtEnd.setText(format.format(mMediaPlayer.getDuration()));
+        txtStart.setText(format.format(curretn));
         seekBar.setMax(mMediaPlayer.getDuration());
+        seekBar.setProgress(curretn);
     }
     private void creatMediaInit(){
         mMediaPlayer = MediaPlayer.create(MainActivity.this,arrSong.get(posison).getFile());
@@ -152,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
         imgCd = findViewById(R.id.imgCd);
 
         //
+        saveSong();
         arrSong = new ArrayList<>();
         arrSong.add(new Song("Con Trai Cưng",R.raw.con_trai_cung));
         arrSong.add(new Song("Đừng Quên Tên Anh",R.raw.dung_quen_ten_anh));
