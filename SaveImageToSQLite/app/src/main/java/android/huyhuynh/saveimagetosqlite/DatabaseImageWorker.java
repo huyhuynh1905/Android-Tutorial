@@ -1,6 +1,7 @@
 package android.huyhuynh.saveimagetosqlite;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
@@ -18,6 +19,11 @@ public class DatabaseImageWorker extends SQLiteOpenHelper {
     public void queryData(String sql){
         SQLiteDatabase database = getWritableDatabase();
         database.execSQL(sql);
+    }
+    //Truy vấn database
+    public Cursor getData(String sql){
+        SQLiteDatabase database = getReadableDatabase();
+        return database.rawQuery(sql,null);
     }
     //insert data vào table Images
     public void insertImageData(String name, String info, byte[] picture){
