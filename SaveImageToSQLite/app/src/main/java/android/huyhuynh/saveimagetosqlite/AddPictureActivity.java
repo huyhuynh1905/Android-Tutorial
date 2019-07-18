@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -14,12 +15,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 public class AddPictureActivity extends AppCompatActivity {
     ImageButton btnCamera, btnFolder;
+    Button btnAddPic, btnCancel;
     ImageView imgView;
     EditText edtName, edtInfo;
 
@@ -47,6 +51,34 @@ public class AddPictureActivity extends AppCompatActivity {
                 importImageFromFolder();
             }
         });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        btnAddPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveImageToDatabase();
+            }
+        });
+    }
+
+    //Lưu ảnh vể database
+    private void saveImageToDatabase() {
+        String name = edtName.getText().toString().trim();
+        String info = edtInfo.getText().toString().trim();
+        //Chuyển ảnh về byte[]
+        BitmapDrawable bitmapDrawable = (BitmapDrawable) imgView.getDrawable();
+        Bitmap bm = bitmapDrawable.getBitmap();
+        ByteArrayOutputStream arrImageOut = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 100,arrImageOut);
+        byte[] picture = arrImageOut.toByteArray();
+        //insert vào data
+        MainActivity.databaseImage.insertImageData(name,info,picture);
+        Toast.makeText(AddPictureActivity.this,"Add Success",Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     //Thêm ảnh từ thư viện có sẵn trong máy
@@ -88,5 +120,7 @@ public class AddPictureActivity extends AppCompatActivity {
         imgView = findViewById(R.id.imgView);
         edtName = findViewById(R.id.edtName);
         edtInfo = findViewById(R.id.edtInfo);
+        btnAddPic = findViewById(R.id.btnAddPic);
+        btnCancel = findViewById(R.id.btnCancel);
     }
 }
