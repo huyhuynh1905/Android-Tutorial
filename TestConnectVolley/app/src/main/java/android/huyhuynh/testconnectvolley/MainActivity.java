@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String url = "http://192.168.1.102/androidstudio/creatJSON.php";
+        String url = "http://192.168.1.102:8080/androidstudio/creatJSON.php";
         JsonArrayRequest arrayRequest = new JsonArrayRequest(Request.Method.POST, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
