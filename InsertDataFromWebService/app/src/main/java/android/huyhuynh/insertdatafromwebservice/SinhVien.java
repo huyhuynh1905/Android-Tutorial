@@ -1,9 +1,11 @@
 package android.huyhuynh.insertdatafromwebservice;
 
+import java.io.Serializable;
+
 /**
  * Created by Huy Huynh on 07/19/19.
  */
-public class SinhVien {
+public class SinhVien implements Serializable {
     private int id;
     private String hoten;
     private int namsinh;

@@ -2,6 +2,7 @@ package android.huyhuynh.insertdatafromwebservice;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,40 +21,56 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ThemSinhVienActivity extends AppCompatActivity {
-    Button btnHuy,btnThem;
-    EditText edtTen, edtNamsinh,edtDiachi;
+public class EditSinhVienActivity extends AppCompatActivity {
+
+    Button btnHuyUp,btnEditUp;
+    EditText edtTenUp, edtNamsinhUp,edtDiachiUp;
+    int id =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_them_sinh_vien);
+        setContentView(R.layout.activity_edit_sinh_vien);
         init();
-        btnHuy.setOnClickListener(new View.OnClickListener() {
+        Intent intent = getIntent();
+        SinhVien sv = (SinhVien) intent.getSerializableExtra("sinhvien");
+        id = sv.getId();
+        edtTenUp.setText(sv.getHoten());
+        edtDiachiUp.setText(sv.getDiachi());
+        edtNamsinhUp.setText(sv.getNamsinh()+"");
+        btnHuyUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
-        btnThem.setOnClickListener(new View.OnClickListener() {
+        btnEditUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                themSinhVien("http://192.168.1.102:8080/androidstudio/inserttosinhvien.php");
+                String url = "http://192.168.1.102:8080/androidstudio/updatessinhvien.php";
+                updateSinhVien(url);
             }
         });
     }
 
-    private void themSinhVien(String url){
+    private void init() {
+        btnEditUp = findViewById(R.id.btnEditUp);
+        btnHuyUp = findViewById(R.id.btnHuyUp);
+        edtTenUp = findViewById(R.id.edtTenUp);
+        edtNamsinhUp = findViewById(R.id.edtNamSinhUp);
+        edtDiachiUp = findViewById(R.id.edtDiaChiUp);
+    }
+    private void updateSinhVien(String url){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url
                 , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (response.trim().equals("Success")){
-                    Toast.makeText(ThemSinhVienActivity.this,"Success",Toast.LENGTH_LONG).show();
+                    Toast.makeText(EditSinhVienActivity.this,"Success",Toast.LENGTH_LONG).show();
                     finish();
                 } else if (response.trim().equals("Error")){
-                    Toast.makeText(ThemSinhVienActivity.this,"Error",Toast.LENGTH_LONG).show();
+                    Toast.makeText(EditSinhVienActivity.this,"Error",Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -66,21 +83,14 @@ public class ThemSinhVienActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 //Đoạn map để insert dữ liệu
                 Map<String,String> params = new HashMap<>();
-                params.put("hoten",edtTen.getText().toString().trim());
-                params.put("namsinh",edtNamsinh.getText().toString().trim());
-                params.put("diachi",edtDiachi.getText().toString().trim());
+                params.put("id",String.valueOf(id));
+                params.put("hoten",edtTenUp.getText().toString().trim());
+                params.put("namsinh",edtNamsinhUp.getText().toString().trim());
+                params.put("diachi",edtDiachiUp.getText().toString().trim());
 
                 return params;
             }
         };
         requestQueue.add(stringRequest);
-    }
-
-    private void init() {
-        btnThem = findViewById(R.id.btnThem);
-        btnHuy = findViewById(R.id.btnHuy);
-        edtTen = findViewById(R.id.edtTen);
-        edtNamsinh = findViewById(R.id.edtNamSinh);
-        edtDiachi = findViewById(R.id.edtDiaChi);
     }
 }

@@ -1,6 +1,7 @@
 package android.huyhuynh.insertdatafromwebservice;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,14 +45,14 @@ public class AdapterSinhVien extends BaseAdapter {
         Button btnDel, btnEdit;
     }
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         ViewHolder holder;
         if (view==null){
             holder = new ViewHolder();
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = layoutInflater.inflate(layout,null);
             holder.btnDel = view.findViewById(R.id.btnDel);
-            holder.btnEdit = view.findViewById(R.id.btnEdit);
+            holder.btnEdit = view.findViewById(R.id.btnThem);
             holder.txtHoten = view.findViewById(R.id.txtHoten);
             holder.txtNamsinh = view.findViewById(R.id.txtNamSinh);
             holder.txtDiachi = view.findViewById(R.id.txtDiaChi);
@@ -60,10 +61,20 @@ public class AdapterSinhVien extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        SinhVien sv = arrSv.get(i);
+        final SinhVien sv = arrSv.get(i);
         holder.txtNamsinh.setText(sv.getNamsinh()+"");
         holder.txtHoten.setText(sv.getHoten());
         holder.txtDiachi.setText(sv.getDiachi());
+
+        //Sửa
+        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context,EditSinhVienActivity.class);
+                intent.putExtra("sinhvien",sv);
+                context.startActivity(intent);
+            }
+        });
         return view;
     }
 }
