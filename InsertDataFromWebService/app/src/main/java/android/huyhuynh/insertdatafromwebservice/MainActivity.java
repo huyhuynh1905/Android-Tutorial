@@ -8,12 +8,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -21,7 +24,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getData(){
+        arrSv.clear(); //Clear lại danh sách mỗi lần get
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "http://192.168.1.102:8080/androidstudio/getdatasinhvientojson.php";
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, url, null
@@ -90,10 +96,43 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //Phương thức xoá ở MainActivity
+    public void deleteSinhVien(final int id){
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        String url = "http://192.168.1.102:8080/androidstudio/deletesinhvien.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url
+                , new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response.trim().equals("Success")){
+                    Toast.makeText(MainActivity.this,"Success",Toast.LENGTH_LONG).show();
+                    //get lại data sau khi xoá
+                    getData();
+                } else if (response.trim().equals("Error")){
+                    Toast.makeText(MainActivity.this,"Error",Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("ErrT", "onErrorResponse: "+error);
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                //Đoạn map để insert dữ liệu
+                Map<String,String> params = new HashMap<>();
+                params.put("id",String.valueOf(id));
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
     @Override
     protected void onRestart() {
         super.onRestart();
-        arrSv.removeAll(arrSv);
         getData();
     }
+
 }
