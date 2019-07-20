@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private void getData(){
         arrSv.clear(); //Clear lại danh sách mỗi lần get
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String url = "http://192.168.1.102:8080/androidstudio/getdatasinhvientojson.php";
+        String url = "https://juliuskma.000webhostapp.com/getdatasinhvientojson.php";
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, url, null
                 , new Response.Listener<JSONArray>() {
                     @Override
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     //Phương thức xoá ở MainActivity
     public void deleteSinhVien(final int id){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String url = "http://192.168.1.102:8080/androidstudio/deletesinhvien.php";
+        String url = "https://juliuskma.000webhostapp.com/deletesinhvien.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url
                 , new Response.Listener<String>() {
             @Override

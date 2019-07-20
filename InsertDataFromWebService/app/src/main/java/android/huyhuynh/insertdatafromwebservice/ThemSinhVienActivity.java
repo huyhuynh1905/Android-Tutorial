@@ -38,7 +38,7 @@ public class ThemSinhVienActivity extends AppCompatActivity {
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                themSinhVien("http://192.168.1.102:8080/androidstudio/inserttosinhvien.php");
+                themSinhVien("https://juliuskma.000webhostapp.com/inserttosinhvien.php");
             }
         });
     }

@@ -47,7 +47,7 @@ public class EditSinhVienActivity extends AppCompatActivity {
         btnEditUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "http://192.168.1.102:8080/androidstudio/updatessinhvien.php";
+                String url = "https://juliuskma.000webhostapp.com/updatessinhvien.php";
                 updateSinhVien(url);
             }
         });
