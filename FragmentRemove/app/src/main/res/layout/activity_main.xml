@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btnFragA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Frag A"
+        android:onClick="addFragmentA"/>
+
+    <Button
+        android:id="@+id/btnFragB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnFragA"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="-2dp"
+        android:layout_toEndOf="@+id/btnFragA"
+        android:layout_toRightOf="@+id/btnFragA"
+        android:text="Frag B"
+        android:onClick="addFragmentB"/>
+
+    <Button
+        android:id="@+id/btnFragC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_toEndOf="@+id/btnFragB"
+        android:layout_toRightOf="@+id/btnFragB"
+        android:text="Frag C"
+        android:onClick="addFragmentC"/>
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="3dp"
+        android:layout_marginRight="3dp"
+        android:text="Back"
+        android:onClick="eventBack"/>
+
+    <Button
+        android:id="@+id/btnDelB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnFragB"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="1dp"
+        android:layout_toEndOf="@+id/btnDelA"
+        android:layout_toRightOf="@+id/btnDelA"
+        android:text="Del B"
+        android:onClick="removeFragmentB"/>
+
+    <Button
+        android:id="@+id/btnDelA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnFragB"
+        android:layout_marginTop="1dp"
+        android:text="Del A"
+        android:onClick="removeFragmentA"/>
+
+    <Button
+        android:id="@+id/btnDelC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnFragC"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="1dp"
+        android:layout_toEndOf="@+id/btnDelB"
+        android:layout_toRightOf="@+id/btnDelB"
+        android:text="Del C"
+        android:onClick="removeFragmentC"/>
+
+    <Button
+        android:id="@+id/btnPopA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnBack"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="-2dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginRight="3dp"
+        android:text="POP A"
+        android:onClick="popFragmentA"/>
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/btnDelC"
+        android:layout_marginTop="7dp">
+
+    </FrameLayout>
+</RelativeLayout>
