@@ -22,7 +22,9 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         FragmentA fragmentA = new FragmentA();
-        fragmentTransaction.replace(R.id.frameLayout,fragmentA,"TagA");
+        fragmentTransaction.add(R.id.frameLayout,fragmentA,"TagA");
+        //Add BackStack để dùng Back and Pop
+        fragmentTransaction.addToBackStack("AAA");
         fragmentTransaction.commit();
 
     }
@@ -31,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         FragmentB fragmentB = new FragmentB();
-        fragmentTransaction.replace(R.id.frameLayout,fragmentB,"TagB");
+        fragmentTransaction.add(R.id.frameLayout,fragmentB,"TagB");
+        fragmentTransaction.addToBackStack("BBB");
         fragmentTransaction.commit();
     }
 
@@ -39,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         FragmentC fragmentC = new FragmentC();
-        fragmentTransaction.replace(R.id.frameLayout,fragmentC,"TagC");
+        fragmentTransaction.add(R.id.frameLayout,fragmentC,"TagC");
+        fragmentTransaction.addToBackStack("CCC");
         fragmentTransaction.commit();
     }
 
@@ -75,8 +79,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void popFragmentA(View view) {
+        //Tương tự back nhưng mà lấy về cái fragment A
+        getSupportFragmentManager().popBackStack("AAA",0);
     }
 
     public void eventBack(View view) {
+        //Trở về fragment trước
+        getSupportFragmentManager().popBackStack();
     }
+
 }
