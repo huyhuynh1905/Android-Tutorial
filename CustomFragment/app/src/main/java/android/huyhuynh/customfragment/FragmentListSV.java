@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.fragment.app.ListFragment;
 
@@ -17,9 +18,11 @@ import java.util.List;
 public class FragmentListSV extends ListFragment {
     AdapterSinhVien adapterSV;
     List<SinhVien> arrSV;
+    DataSendSinhVien mSendSinhVien;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mSendSinhVien = (DataSendSinhVien) getActivity();
         arrSV = new ArrayList<>();
         addSinhVien();
         adapterSV = new AdapterSinhVien(getActivity(),R.layout.item_sinhvien,arrSV);
@@ -27,6 +30,15 @@ public class FragmentListSV extends ListFragment {
 
         return inflater.inflate(R.layout.fragment_list,container,false);
     }
+
+    //Truyền sinh viên được chọn về maincactivity
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        mSendSinhVien.senData(arrSV.get(position));
+        //Toast.makeText(getActivity(),arrSV.get(position).getAge()+"",Toast.LENGTH_SHORT).show();
+    }
+
     public void addSinhVien(){
         arrSV.add(new SinhVien("Huy",19,"Huế"));
         arrSV.add(new SinhVien("Mai",19,"Huế"));
