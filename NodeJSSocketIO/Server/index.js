@@ -9,13 +9,29 @@ app.get("/", function (req,res) {
 });
 
 console.log("Server running!")
-
+var arrUser = ["Admin"];
+var kiemtra = false;
 io.sockets.on('connection',function (socket) {
    console.log("Client connected!");
-    socket.on('letter-from-client',function (data) {
-        console.log("Client: "+data);
-        io.sockets.emit('server-send-data',
-            {noidung:data}
-            );
+   //gửi danh sách nếu client mới mở
+    if (arrUser!=null){
+        //gửi danh sách user về các máy
+        io.sockets.emit('server-send-user',{users:arrUser})
+    }
+    socket.on('client-register',function (data) {
+        //Kiểm tra user tồn tại hay ko
+        if (arrUser.indexOf(data) == -1){
+            //không tồn tại user thì được phép đăng kí
+            arrUser.push(data);
+            kiemtra = true;
+            console.log("Register "+data+": OK!");
+            //gửi danh sách user về các máy
+            io.sockets.emit('server-send-user',{users:arrUser})
+        }  else {
+            kiemtra = false;
+            console.log("Register Error");
+        }
+        //Gửi kết quả đăng kí về client(Chỉ client nào gửi)
+        socket.emit('server-register',{ketqua:kiemtra});
     })
 });
