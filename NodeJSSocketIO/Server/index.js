@@ -12,5 +12,10 @@ console.log("Server running!")
 
 io.sockets.on('connection',function (socket) {
    console.log("Client connected!");
-
+    socket.on('letter-from-client',function (data) {
+        console.log("Client: "+data);
+        io.sockets.emit('server-send-data',
+            {noidung:data}
+            );
+    })
 });
