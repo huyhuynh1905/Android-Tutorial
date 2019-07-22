@@ -40,7 +40,12 @@ public class MainActivity extends AppCompatActivity {
         mSocket.on("server-register",onReceiveRegister);
         //Thread lấy danh sách user
         mSocket.on("server-send-user",onReceiveUsers);
+        //Thread lấy tin nhắn về:
+        mSocket.on("server-send-message",onReceiveMessage);
+        //Đăng kí user
         registerUser();
+        //gửi tin nhắn
+        sendMessage();
 
     }
 
@@ -95,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     };
+    //Cập nhật danh sách user
     private  Emitter.Listener onReceiveUsers = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
@@ -118,6 +124,25 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     };
+    //Cập nhật tin nhắn các user từ server:
+    private Emitter.Listener onReceiveMessage = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject object = (JSONObject) args[0];
+                    try {
+                        String mess = object.getString("content");
+                        arrChat.add(mess);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    adapterChat.notifyDataSetChanged();
+                }
+            });
+        }
+    };
     //event đăng kí user:
     public void registerUser(){
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +153,21 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     mSocket.emit("client-register",edtChat.getText().toString().trim());
                 }
+                edtChat.setText("");
+            }
+        });
+    }
+    //event gửi tin nhắn chat
+    private void sendMessage(){
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (edtChat.getText().toString().trim().length()==0){
+                    Toast.makeText(MainActivity.this,"Nhập user!",Toast.LENGTH_SHORT).show();
+                } else {
+                    mSocket.emit("client-chat",edtChat.getText().toString().trim());
+                }
+                edtChat.setText("");
             }
         });
     }

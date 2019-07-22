@@ -11,7 +11,10 @@ app.get("/", function (req,res) {
 console.log("Server running!")
 var arrUser = ["Admin"];
 var kiemtra = false;
+
+
 io.sockets.on('connection',function (socket) {
+    //nhánh này dùng để đăng kí user
    console.log("Client connected!");
    //gửi danh sách nếu client mới mở
     if (arrUser!=null){
@@ -25,6 +28,8 @@ io.sockets.on('connection',function (socket) {
             arrUser.push(data);
             kiemtra = true;
             console.log("Register "+data+": OK!");
+            //gán tên user cho socket này
+            socket.un = data;
             //gửi danh sách user về các máy
             io.sockets.emit('server-send-user',{users:arrUser})
         }  else {
@@ -33,5 +38,12 @@ io.sockets.on('connection',function (socket) {
         }
         //Gửi kết quả đăng kí về client(Chỉ client nào gửi)
         socket.emit('server-register',{ketqua:kiemtra});
-    })
+    });
+    //nhánh này để nhận và gửi nội dung chat
+    socket.on('client-chat',function (message) {
+        console.log(socket.un+": "+message);
+        io.sockets.emit('server-send-message',{content:socket.un+": "+message});
+    });
 });
+
+
