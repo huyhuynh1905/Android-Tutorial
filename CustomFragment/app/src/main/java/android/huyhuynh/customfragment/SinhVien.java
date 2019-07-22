@@ -1,9 +1,11 @@
 package android.huyhuynh.customfragment;
 
+import java.io.Serializable;
+
 /**
  * Created by Huy Huynh on 07/22/19.
  */
-public class SinhVien {
+public class SinhVien implements Serializable {
     private String name;
     private int age;
     private String diachi;

@@ -2,6 +2,7 @@ package android.huyhuynh.customfragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity implements DataSendSinhVien{
@@ -16,6 +17,12 @@ public class MainActivity extends AppCompatActivity implements DataSendSinhVien{
     public void senData(SinhVien sv) {
         FragmentInfo fragmentInfo = (FragmentInfo)
                 getSupportFragmentManager().findFragmentById(R.id.fragmentInfo);
-        fragmentInfo.setInfoSinhVien(sv);
+        if (fragmentInfo!=null && fragmentInfo.isInLayout()) {
+            fragmentInfo.setInfoSinhVien(sv);
+        } else {
+            Intent intent = new Intent(MainActivity.this,InfoActivity.class);
+            intent.putExtra("dataSV",sv);
+            startActivity(intent);
+        }
     }
 }
