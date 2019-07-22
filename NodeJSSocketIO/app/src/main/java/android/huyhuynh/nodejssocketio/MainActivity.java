@@ -29,15 +29,7 @@ public class MainActivity extends AppCompatActivity {
         connectIO();
         //Đợi tin nhắn từ server gửi về:
         mSocket.on("server-send-data",onReceiveData);
-        //gửi tin khi bấm nút
-        btnConnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //gửi đi tin nhắn
-                mSocket.emit("letter-from-client","Letter From Client");
 
-            }
-        });
     }
 
     //Khởi tạo kết nối server
@@ -53,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init(){
-        btnConnect = findViewById(R.id.btnConnet);
     }
 
     private Emitter.Listener onReceiveData = new Emitter.Listener() {
