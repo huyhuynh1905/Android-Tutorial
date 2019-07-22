@@ -7,3 +7,10 @@ server.listen(process.env.PORT || 3000);
 app.get("/", function (req,res) {
    res.sendFile(__dirname + "/index.html");
 });
+
+console.log("Server running!")
+
+io.sockets.on('connection',function (socket) {
+   console.log("Client connected!");
+
+});
