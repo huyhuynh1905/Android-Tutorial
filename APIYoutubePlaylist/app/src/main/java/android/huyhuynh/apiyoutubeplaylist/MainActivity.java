@@ -2,7 +2,11 @@ package android.huyhuynh.apiyoutubeplaylist;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -15,6 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,14 +28,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends YouTubeBaseActivity
-                            implements YouTubePlayer.OnInitializedListener {
+public class MainActivity extends YouTubeBaseActivity {
     ListView lvVideo;
     AdapterVideo mAdapterVideo;
     List<VideoYouTube> arrVideo;
+    //YouTubePlayerView youTubbeVideo;
 
-    String API_KEY = "AIzaSyAYJkqEdb7piE-2hZoSFIvnABbtnCrKfr8";
+    public static String API_KEY = "AIzaSyAYJkqEdb7piE-2hZoSFIvnABbtnCrKfr8";
     String ID_LIST = "PLRjU0Pq1eItgFf1foKbjtwQjGgwEN8BLp";
+
+    String idvideoselect;
 
     /*Get json playlist
     https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId={ID_LIST}&key={YOUR_API_KEY}&maxResults={Số video trả về tối đa là 50}
@@ -43,25 +50,28 @@ public class MainActivity extends YouTubeBaseActivity
         setContentView(R.layout.activity_main);
         init();
         getJSONListPlay(urlGetJson);
+
+        lvVideo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                idvideoselect = arrVideo.get(i).getId();
+                Log.d("VVV",idvideoselect);
+                Intent intent = new Intent(MainActivity.this,VideoActivity.class);
+                intent.putExtra("ID",idvideoselect);
+                startActivity(intent);
+            }
+        });
     }
 
     private void init() {
         //Khởi tạo
         lvVideo = findViewById(R.id.lvVideo);
+        //youTubbeVideo = findViewById(R.id.playToutube);
         arrVideo = new ArrayList<>();
         mAdapterVideo = new AdapterVideo(this,R.layout.item_video_list,arrVideo);
         lvVideo.setAdapter(mAdapterVideo);
     }
 
-    @Override
-    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-
-    }
-
-    @Override
-    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-
-    }
     //Get JSON List:
     private void getJSONListPlay(final String url){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
