@@ -3,6 +3,7 @@ package android.huyhuynh.apiyoutubeplaylist;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -19,8 +20,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends YouTubeBaseActivity
                             implements YouTubePlayer.OnInitializedListener {
+    ListView lvVideo;
+    AdapterVideo mAdapterVideo;
+    List<VideoYouTube> arrVideo;
 
     String API_KEY = "AIzaSyAYJkqEdb7piE-2hZoSFIvnABbtnCrKfr8";
     String ID_LIST = "PLRjU0Pq1eItgFf1foKbjtwQjGgwEN8BLp";
@@ -34,7 +41,16 @@ public class MainActivity extends YouTubeBaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        init();
         getJSONListPlay(urlGetJson);
+    }
+
+    private void init() {
+        //Khởi tạo
+        lvVideo = findViewById(R.id.lvVideo);
+        arrVideo = new ArrayList<>();
+        mAdapterVideo = new AdapterVideo(this,R.layout.item_video_list,arrVideo);
+        lvVideo.setAdapter(mAdapterVideo);
     }
 
     @Override
@@ -69,7 +85,9 @@ public class MainActivity extends YouTubeBaseActivity
                         //Lấy id video
                         JSONObject objectResourceId = objectSnippet.getJSONObject("resourceId");
                         idvideo = objectResourceId.getString("videoId");
+                        arrVideo.add(new VideoYouTube(tittle,urlImage,idvideo));
                     }
+                    mAdapterVideo.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
