@@ -15,26 +15,29 @@ public class MainActivity extends YouTubeBaseActivity
 
     YouTubePlayerView mYouTubePlayerView;
 
-    String API_KEY = "AIzaSyAUD_hrm-ZxChtofp4ORCYzImx38NQm61Q";
+    String API_KEY = "AIzaSyAUD_hrm-ZxChtofp4ORCYzImx38NQm61Q"; //Key tạo trên Google Console
+
     int REQUEST_ERR = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //khai báo
         mYouTubePlayerView = findViewById(R.id.youtubeView);
         mYouTubePlayerView.initialize(API_KEY,this);
     }
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+        //chuỗi truyền vào là id của video
         youTubePlayer.cueVideo("DNrNBLI3d68");
     }
 
     @Override
     public void onInitializationFailure(YouTubePlayer.Provider provider,
                                         YouTubeInitializationResult youTubeInitializationResult) {
+        //Nếu có lỗi
         if (youTubeInitializationResult.isUserRecoverableError()){
             youTubeInitializationResult.getErrorDialog(MainActivity.this,REQUEST_ERR);
         }else {
