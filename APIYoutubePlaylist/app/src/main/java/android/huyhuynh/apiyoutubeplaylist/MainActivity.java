@@ -15,6 +15,8 @@ import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends YouTubeBaseActivity
@@ -45,13 +47,32 @@ public class MainActivity extends YouTubeBaseActivity
 
     }
     //Get JSON List:
-    private void getJSONListPlay(String url){
+    private void getJSONListPlay(final String url){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, url, null
                 , new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(MainActivity.this,response.toString(),Toast.LENGTH_LONG).show();
+                try {
+                    JSONArray arrJSONItem = response.getJSONArray("items");
+                    String tittle = "";
+                    String urlImage = "";
+                    String idvideo = "";
+                    for (int i=0;i<arrJSONItem.length();i++){
+                        JSONObject objectItem = arrJSONItem.getJSONObject(i);
+                        JSONObject objectSnippet = objectItem.getJSONObject("snippet");
+                        tittle = objectSnippet.getString("title");
+                        //Lấy ảnh nằm trong thumnails
+                        JSONObject objectThumbnails = objectSnippet.getJSONObject("thumbnails");
+                        JSONObject objectMedium = objectThumbnails.getJSONObject("medium");
+                        urlImage = objectMedium.getString("url");
+                        //Lấy id video
+                        JSONObject objectResourceId = objectSnippet.getJSONObject("resourceId");
+                        idvideo = objectResourceId.getString("videoId");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
