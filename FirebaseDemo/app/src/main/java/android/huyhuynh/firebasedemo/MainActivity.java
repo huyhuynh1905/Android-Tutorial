@@ -31,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
         myMap.put("Xe04",4);
         mDatabaseReference.child("XeBus").setValue(myMap);
 
-        //TH
+        //TH4: Use push
+        SinhVien sv1 = new SinhVien("Hùng",20,"Huế");
+        SinhVien sv2 = new SinhVien("Nam",18,"Hà Nội");
+        mDatabaseReference.child("HocVien").push().setValue(sv2);
     }
 }
