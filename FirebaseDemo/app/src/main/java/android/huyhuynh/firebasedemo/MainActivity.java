@@ -1,9 +1,13 @@
 package android.huyhuynh.firebasedemo;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -35,5 +39,18 @@ public class MainActivity extends AppCompatActivity {
         SinhVien sv1 = new SinhVien("Hùng",20,"Huế");
         SinhVien sv2 = new SinhVien("Nam",18,"Hà Nội");
         mDatabaseReference.child("HocVien").push().setValue(sv2);
+
+        //Bắt sự kiện hoàn thành khi set value
+        mDatabaseReference.child("SuKien").setValue("Test Sự Kiện", new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                if (databaseError==null){
+                    Toast.makeText(MainActivity.this,"Lưu thành công",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this,"Lưu thất bại",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 }
