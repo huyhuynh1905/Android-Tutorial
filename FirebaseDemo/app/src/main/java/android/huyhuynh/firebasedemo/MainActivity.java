@@ -18,6 +18,10 @@ public class MainActivity extends AppCompatActivity {
 
         //Khởi tạo
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        //TH1: Thêm chuỗi
         mDatabaseReference.child("HoTen").setValue("Huỳnh Bảo Huy");
+        //TH2: Set Object
+        SinhVien sv = new SinhVien("Hao",19,"Thừa Thiên Huế");
+        mDatabaseReference.child("SinhVien").setValue(sv);
     }
 }
