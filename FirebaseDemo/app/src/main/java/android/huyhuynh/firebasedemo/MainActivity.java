@@ -7,6 +7,9 @@ import android.os.Bundle;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
 
     DatabaseReference mDatabaseReference;
@@ -23,5 +26,9 @@ public class MainActivity extends AppCompatActivity {
         //TH2: Set Object
         SinhVien sv = new SinhVien("Hao",19,"Thừa Thiên Huế");
         mDatabaseReference.child("SinhVien").setValue(sv);
+        //TH3: Set map
+        Map<String,Integer> myMap = new HashMap<>();
+        myMap.put("Xe04",4);
+        mDatabaseReference.child("XeBus").setValue(myMap);
     }
 }
