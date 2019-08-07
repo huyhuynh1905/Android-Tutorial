@@ -1,9 +1,17 @@
 # Android-Tutorial
-Learning Android!
+## Các thư viện được sử dụng trong khoá:
 
-//Libra git commit 'NodeJS chat App 2'
+1. Volley Android
+>     dependencies {  
+> 	   		implementation 'com.android.volley:volley:1.1.1'  
+>     }
 
-implementation ('io.socket:socket.io-client:1.0.0') {
-        // excluding org.json which is provided by Android
-        exclude group: 'org.json', module: 'json'
-    }
+2. Nodes socket.io
+>     dependencies {  
+> 	    		implementation 'io.socket:socket.io-client:1.0.0'   
+>     }
+
+3. Thư viện xử lí ảnh Picaso
+>     dependencies {  
+> 	    		implementation 'com.squareup.picasso:picasso:2.5.2'   
+>     }
