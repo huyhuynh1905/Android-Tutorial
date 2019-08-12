@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         intentIntegrator.setPrompt(""); // dòng chữ tr
         //intentIntegrator.setCameraId(0);  // Use a specific camera of the device
         intentIntegrator.setOrientationLocked(false);
-        intentIntegrator.setBeepEnabled(true);
+        intentIntegrator.setBeepEnabled(false); //Tiếng kêu sau khi quét xong
         intentIntegrator.setBarcodeImageEnabled(true);
         //intentIntegrator.setTimeout(10000); //Thời gian cho đến khi kết thúc
 
