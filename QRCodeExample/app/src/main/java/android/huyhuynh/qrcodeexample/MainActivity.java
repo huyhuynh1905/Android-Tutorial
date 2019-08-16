@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         intentIntegrator.setOrientationLocked(false);
         intentIntegrator.setBeepEnabled(false); //Tiếng kêu sau khi quét xong
         intentIntegrator.setBarcodeImageEnabled(true);
-        //intentIntegrator.setTimeout(10000); //Thời gian cho đến khi kết thúc
+        intentIntegrator.setTimeout(10000); //Thời gian cho đến khi kết thúc
 
 
 
@@ -57,8 +57,9 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 try {
                     JSONObject jsonObject = new JSONObject(intentResult.getContents());
-                    String name = jsonObject.getString("name");
-                    txtName.setText(name);
+                    int maban = jsonObject.getInt("maban");
+                    int current = (int) System.currentTimeMillis();
+                    txtName.setText(maban+"+"+current);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
