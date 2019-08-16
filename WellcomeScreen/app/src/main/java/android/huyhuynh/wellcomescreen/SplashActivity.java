@@ -13,12 +13,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.google.android.material.snackbar.Snackbar;
 
 public class SplashActivity extends Activity {
     ProgressBar loadProgress;
+    Button btnStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +62,15 @@ public class SplashActivity extends Activity {
                                 });
                         snackbar.show();
                     } else {
-                        goMainActivity();
+                        synchronized (this){
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    loadProgress.setVisibility(View.INVISIBLE);
+                                    btnStart.setVisibility(View.VISIBLE);
+                                }
+                            });
+                        }
                     }
                 }
             }
@@ -71,6 +81,8 @@ public class SplashActivity extends Activity {
 
     private void init() {
         loadProgress = findViewById(R.id.loadProgress);
+        btnStart = findViewById(R.id.btnStart);
+        btnStart.setVisibility(View.INVISIBLE);
     }
 
 
@@ -96,5 +108,9 @@ public class SplashActivity extends Activity {
         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void loadHomepage(View view) {
+        goMainActivity();
     }
 }
