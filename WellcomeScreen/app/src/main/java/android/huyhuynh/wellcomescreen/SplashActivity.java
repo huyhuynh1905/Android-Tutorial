@@ -13,10 +13,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 
 import com.google.android.material.snackbar.Snackbar;
 
 public class SplashActivity extends Activity {
+    ProgressBar loadProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,9 @@ public class SplashActivity extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
 
+        //Ánh xạ:
+        init();
+
         final ConstraintLayout splashConstrLayout = findViewById(R.id.splashConstrLayout);
 
         //Load internect
@@ -34,11 +39,17 @@ public class SplashActivity extends Activity {
             @Override
             public void run() {
                 try {
-                    sleep(900);
+                    int n = 100;
+                    while (n<3500){
+                        n=n+100;
+                        sleep(100);
+                    }
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
                     if (!isConnected()){
+                        loadProgress.setVisibility(View.INVISIBLE);
                         Snackbar snackbar = Snackbar.make(splashConstrLayout,"Không có kết nối Internet!",
                                 Snackbar.LENGTH_INDEFINITE)
                                 .setAction("Thử Lại", new View.OnClickListener() {
@@ -58,6 +69,9 @@ public class SplashActivity extends Activity {
 
     }
 
+    private void init() {
+        loadProgress = findViewById(R.id.loadProgress);
+    }
 
 
     //Kiểm tra có kết nối internet không
