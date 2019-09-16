@@ -8,20 +8,22 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 /**
- * Created by Huy Huynh on 09/05/19.
+ * Created by Huy Huynh on 16-09-2019.
  */
 public class MenuAdapter extends BaseAdapter {
 
-    Context mContext;
-    int layout;
-    List<Menu> arrMenu;
+    private Context mContext;
+    private int mLayout;
+    private List<Menu> arrMenu;
 
     public MenuAdapter(Context context, int layout, List<Menu> arrMenu) {
         mContext = context;
-        this.layout = layout;
+        mLayout = layout;
         this.arrMenu = arrMenu;
     }
 
@@ -42,36 +44,30 @@ public class MenuAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-
         ViewHolder viewHolder;
-        if (view == null){
-            // inflate the layout
-            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(layout, null);
-
-            // set up the ViewHolder
+        if (view==null){
             viewHolder = new ViewHolder();
-            viewHolder.txtTen = view.findViewById(R.id.txtTen);
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(mLayout,null);
+            viewHolder.imgHinhAnh = view.findViewById(R.id.imgHinhAnh);
+            viewHolder.txtTenThucUong = view.findViewById(R.id.txtTenThucUong);
             viewHolder.txtGia = view.findViewById(R.id.txtGia);
-            viewHolder.imgHinh = view.findViewById(R.id.imgHinh);
 
-            // store the holder with the view
             view.setTag(viewHolder);
-        }else {
+        } else {
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        String ten = arrMenu.get(i).getTenThucUong();
-        String gia = String.valueOf(arrMenu.get(i).getDonGia());
-
-        viewHolder.txtTen.setText(ten);
-        viewHolder.txtGia.setText("Giá: "+gia);
-
+        //Gán
+        viewHolder.txtTenThucUong.setText(arrMenu.get(i).getTenThucUong());
+        viewHolder.txtGia.setText("Giá: "+arrMenu.get(i).getDonGia());
+        Picasso.get().load(arrMenu.get(i).getHinhAnh()).into(viewHolder.imgHinhAnh);
 
         return view;
     }
-    static class ViewHolder{
-        TextView txtTen,txtGia;
-        ImageView imgHinh;
+
+    private class ViewHolder{
+        ImageView imgHinhAnh;
+        TextView txtTenThucUong, txtGia;
     }
 }

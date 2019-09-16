@@ -1,27 +1,38 @@
 package android.huyhuynh.retrofitadvanced;
 
 /**
- * Created by Huy Huynh on 09/05/19.
+ * Created by Huy Huynh on 16-09-2019.
  */
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Menu {
 
+    @SerializedName("maThucUong")
+    @Expose
     private String maThucUong;
+    @SerializedName("tenThucUong")
+    @Expose
     private String tenThucUong;
+    @SerializedName("donGia")
+    @Expose
     private double donGia;
+    @SerializedName("hinhAnh")
+    @Expose
     private String hinhAnh;
+    @SerializedName("ghiChu")
+    @Expose
     private String ghiChu;
 
-    public Menu() {
-        super();
-    }
-
     public Menu(String maThucUong, String tenThucUong, double donGia, String hinhAnh, String ghiChu) {
-        super();
         this.maThucUong = maThucUong;
         this.tenThucUong = tenThucUong;
         this.donGia = donGia;
         this.hinhAnh = hinhAnh;
         this.ghiChu = ghiChu;
+    }
+
+    public Menu() {
     }
 
     public String getMaThucUong() {
@@ -63,12 +74,5 @@ public class Menu {
     public void setGhiChu(String ghiChu) {
         this.ghiChu = ghiChu;
     }
-
-    @Override
-    public String toString() {
-        return "Menu [maThucUong=" + maThucUong + ", tenThucUong=" + tenThucUong + ", donGia=" + donGia + ", hinhAnh="
-                + hinhAnh + ", ghiChu=" + ghiChu + "]";
-    }
-
 
 }
